@@ -15,7 +15,7 @@ int main()
         cin >> number;
         for (int i = 0; number[i] != '\0'; i++)
         {
-		      if (number[i] < '0' || number[i] > '9' /*|| number[i] != '.'*/ ){
+		      if (number[i] < '0' || number[i] > '9'){
                     if (number[i] != '.'){
                         check++;
                     }
