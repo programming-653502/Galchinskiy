@@ -31,7 +31,7 @@ List::~List() //Деструктор
      }
  }
 
- void List::Add(int x, int y) //Добавляекм в список
+ void List::Add(int x, int y) //Добавляем в список
  {
    Node *temp = new Node;
    temp->Next = NULL;
