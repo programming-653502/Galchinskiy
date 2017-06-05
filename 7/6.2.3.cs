@@ -2,7 +2,7 @@ using System;
 
 namespace ConsoleApplication3
 {
-    class Matriculant
+    class Matriculant     //Абитуриент
     {
         public int ID;
         public string speciality;
@@ -10,7 +10,7 @@ namespace ConsoleApplication3
         int first_mark, second_mark, third_mark;
         int grade_score, number_of_school, total_score; 
         
-        public void add (int i)
+        public void add (int i)   //Подача заявления
         {
             ID = i++;
             Console.WriteLine("Choose faculty:");
@@ -189,7 +189,7 @@ namespace ConsoleApplication3
             } while (number_of_school == 0);
         }
 
-        public void show()
+        public void show() // Вывод рейтинга абитуриентов
         {
             Console.WriteLine(ID.ToString() + ":");
 
@@ -215,7 +215,7 @@ namespace ConsoleApplication3
             Console.WriteLine();           
         }
 
-        public int checking()
+        public int checking() // Проверка на ввод
         {
             int Value;
             do
@@ -235,7 +235,7 @@ namespace ConsoleApplication3
             return Value;
         }
 
-        public static void Rating_sort(Matriculant[] abitur, int Length)
+        public static void Rating_sort(Matriculant[] abitur, int Length) //Сортировка пузырьком
         {
             if (abitur[0] == null)
             {
@@ -265,7 +265,7 @@ namespace ConsoleApplication3
         static void Main(string[] args)
         {
             int i = 0;
-            Matriculant[] abitur = new Matriculant[255];
+            Matriculant[] abitur = new Matriculant[255]; //Инициализируем объекты
             int[] speciality_count = new int[9];
             string[] speciality = new string[] { "ME", "PMEN", "PMS", "CMSN", "SIT", "ITP", "ASPI", "AI", "ITM" };
             for (int j = 0; j < 9; j++)
@@ -354,7 +354,7 @@ namespace ConsoleApplication3
                                 }
                             } while (number == 0);
 
-                            for (int j = number - 1; j < i; j++)
+                            for (int j = number - 1; j < i; j++)  // Удаление заявки(абитуриента)
                             {
                                 if (j == i - 1)
                                 {
