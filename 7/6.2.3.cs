@@ -10,8 +10,8 @@ namespace ConsoleApplication3
         int first_mark, second_mark, third_mark;
         int grade_score, number_of_school, total_score;
         bool Student = false;
-        
-        public void add (int i)             //Подача заявления
+
+        public void add(int i)             //Подача заявления
         {
             ID = i++;
             Console.WriteLine("Choose faculty:");
@@ -155,18 +155,22 @@ namespace ConsoleApplication3
 
                 }
             } while (exit);
-            
+
             Console.Clear();
+            Console.WriteLine("===============");
+            Console.WriteLine("Add matriculant");
+            Console.WriteLine("===============");
+            Console.WriteLine();
             Console.WriteLine("Enter your FIO: ");
             FIO = Console.ReadLine();
-            Console.WriteLine("Enter first mark: ");
+            Console.WriteLine("Enter first mark(6-100): ");
             first_mark = checking();
-            
-            Console.WriteLine("Enter second mark: ");
+
+            Console.WriteLine("Enter second mark(6-100): ");
             second_mark = checking();
-            Console.WriteLine("Enter third mark: ");
+            Console.WriteLine("Enter third mark(6-100): ");
             third_mark = checking();
-            Console.WriteLine("Enter your grade score: ");
+            Console.WriteLine("Enter your grade score(6-100): ");
             grade_score = checking();
 
             total_score = first_mark + second_mark + third_mark + grade_score;
@@ -192,7 +196,7 @@ namespace ConsoleApplication3
 
         public void show()                          //Вывод абитуриентов/студентов
         {
-            Console.WriteLine(ID.ToString() + ":");
+            Console.WriteLine("Matriculant №" + (ID + 1));
 
             Console.WriteLine("Speciality: " + speciality);
 
@@ -209,11 +213,11 @@ namespace ConsoleApplication3
             Console.WriteLine("Total score: " + total_score.ToString());
 
             Console.WriteLine("Passport serial number: " + passport_info);
-           
+
             Console.WriteLine("City: " + city);
-            
+
             Console.WriteLine("Number of school: " + number_of_school.ToString());
-            Console.WriteLine();           
+            Console.WriteLine();
         }
 
         public static void Show_students(Matriculant[] abitur, int Length)   //Выбор специальности для вывода студентов
@@ -363,10 +367,15 @@ namespace ConsoleApplication3
 
         public static void check_abitur(Matriculant[] abitur, int Length, string spec)     //Проверка на студента
         {
+            Console.Clear();
+            Console.WriteLine("========================");
+            Console.WriteLine("List of students of " + spec);
+            Console.WriteLine("========================");
+            Console.WriteLine();
             for (int i = 0; i < Length; i++)
             {
                 if (abitur[i].speciality == spec && abitur[i].Student == true)
-                    abitur[i].show(); 
+                    abitur[i].show();
             }
         }
 
@@ -396,7 +405,7 @@ namespace ConsoleApplication3
             {
                 Console.WriteLine("Your list is empty!");
                 return;
-            }    
+            }
             for (int i = 0; i < Length; i++)
             {
                 for (int j = 0; j < Length - i - 1; j++)
@@ -413,7 +422,7 @@ namespace ConsoleApplication3
                 }
             }
         }
-                                 //Зачисление по баллу при кол-ве заявок больше, чем мест
+        //Зачисление по баллу при кол-ве заявок больше, чем мест
         public static void Enroll_by_score(Matriculant[] abitur, int Length, string spec)
         {
             int free_places = 5;
@@ -425,10 +434,10 @@ namespace ConsoleApplication3
                 {
                     abitur[i].Student = true;
                     free_places--;
-                }                
+                }
             }
         }
-                               //Зачисление по баллу при кол-ве заявок меньше, чем мест
+        //Зачисление по баллу при кол-ве заявок меньше, чем мест
         public static void Enroll_all(Matriculant[] abitur, int Length, string spec)
         {
             for (int i = 0; i < Length; i++)
@@ -452,7 +461,7 @@ namespace ConsoleApplication3
             {
                 speciality_count[j] = 0;
                 speciality_places[j] = 5;  //Кол-во бюджетных мест(можно изменить)
-            }           
+            }
 
             for (int exit = 0; exit != 1;)
             {
@@ -472,16 +481,12 @@ namespace ConsoleApplication3
                     case ConsoleKey.D1:
                         {
                             Console.Clear();
-                            Console.WriteLine("===============");
-                            Console.WriteLine("Add matriculant");
-                            Console.WriteLine("===============");
-                            Console.WriteLine();
                             abitur[i] = new Matriculant();
 
 
                             abitur[i].add(i);
 
-                        
+
                             i++;
 
                             break;
@@ -513,6 +518,13 @@ namespace ConsoleApplication3
                             Console.WriteLine("Delete matriculant");
                             Console.WriteLine("==================");
                             Console.WriteLine();
+                            if (abitur[0] == null)
+                            {
+                                Console.WriteLine("Your list is empty!");
+                                Console.WriteLine("Click any button... ");
+                                Console.ReadKey();
+                                break;
+                            }
                             for (int j = 0; j < i; j++)
                             {
                                 Console.WriteLine("Matriculant №" + (j + 1));
@@ -558,13 +570,17 @@ namespace ConsoleApplication3
                     case ConsoleKey.D4:
                         {
                             Console.Clear();
+                            Console.WriteLine("======");
+                            Console.WriteLine("Enroll");
+                            Console.WriteLine("======");
+                            Console.WriteLine();
                             Matriculant.Rating_sort(abitur, i);
                             for (int j = 0; j < i; j++)
                             {
-                                for(int count = 0; count < 9; count++)
+                                for (int count = 0; count < 9; count++)
                                 {
                                     if (abitur[j].speciality == speciality[count])
-                                        speciality_count[count]++;                                  
+                                        speciality_count[count]++;
                                 }
 
 
@@ -587,10 +603,13 @@ namespace ConsoleApplication3
                     case ConsoleKey.D5:
                         {
                             Console.Clear();
-                            /* Console.WriteLine("======================");
-                             Console.WriteLine("List of students");
-                             Console.WriteLine("======================");
-                             Console.WriteLine();*/
+                            if (abitur[0] == null)
+                            {
+                                Console.WriteLine("Your list is empty!");
+                                Console.WriteLine("Click any button... ");
+                                Console.ReadKey();
+                                break;
+                            }
                             Matriculant.Show_students(abitur, i);
                             Console.WriteLine("Click any button...");
                             Console.ReadKey();
